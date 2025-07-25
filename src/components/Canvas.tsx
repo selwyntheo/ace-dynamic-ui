@@ -427,8 +427,9 @@ function ComponentRenderer({
           boxShadow: '0 0 0 2px',
           boxShadowColor: 'primary.main',
         },
-        left: component.xPosition,
-        top: component.yPosition,
+        // Remove absolute positioning that was causing spacing issues
+        // left: component.xPosition,
+        // top: component.yPosition,
       }}
     >
       {renderComponent()}

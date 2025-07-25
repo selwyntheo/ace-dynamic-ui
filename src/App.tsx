@@ -541,37 +541,6 @@ function App() {
 
       {/* Main Content */}
       <Box sx={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
-        {/* Always visible debug panel */}
-        <div style={{
-          position: 'fixed',
-          top: '70px',
-          left: '10px',
-          background: 'lime',
-          color: 'black',
-          padding: '15px',
-          zIndex: 99999,
-          border: '3px solid blue',
-          fontSize: '14px',
-          fontFamily: 'monospace'
-        }}>
-          <div>🔍 ALWAYS VISIBLE DEBUG:</div>
-          <div>isBuilderMode: {String(isBuilderMode)}</div>
-          <div>showProperties: {String(showProperties)}</div>
-          <div>selectedComponent: {selectedComponent?.type || 'null'}</div>
-          <div>components.length: {components.length}</div>
-          <button 
-            onClick={() => {
-              console.log('🧪 TEST: Manual selection of first component');
-              if (components.length > 0) {
-                handleComponentSelect(components[0]);
-              }
-            }}
-            style={{ marginTop: '10px', padding: '5px', background: 'yellow' }}
-          >
-            TEST: Select First Component
-          </button>
-        </div>
-        
         <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
           {isBuilderMode && (
             <ComponentPanel 
@@ -588,25 +557,11 @@ function App() {
           />
           
           {isBuilderMode && showProperties && (
-            <>
-              <div style={{
-                position: 'fixed',
-                top: '200px',
-                left: '10px',
-                background: 'orange',
-                color: 'black',
-                padding: '10px',
-                zIndex: 99999,
-                border: '2px solid red'
-              }}>
-                🔍 DEBUG: showProperties={String(showProperties)}, selectedComponent={selectedComponent?.type || 'null'}
-              </div>
-              <PropertiesPanel
-                component={selectedComponent}
-                onClose={handlePropertiesClose}
-                onUpdate={handleComponentUpdate}
-              />
-            </>
+            <PropertiesPanel
+              component={selectedComponent}
+              onClose={handlePropertiesClose}
+              onUpdate={handleComponentUpdate}
+            />
           )}
         </DndContext>
 
