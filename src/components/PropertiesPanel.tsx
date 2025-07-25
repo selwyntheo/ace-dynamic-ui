@@ -21,10 +21,7 @@ interface PropertiesPanelProps {
 }
 
 export function PropertiesPanel({ component, onClose, onUpdate }: PropertiesPanelProps) {
-  console.log('PropertiesPanel render - component:', component?.type, component?.name);
-  
   if (!component) {
-    console.log('PropertiesPanel: No component provided, returning null');
     return null;
   }
 
@@ -182,12 +179,13 @@ export function PropertiesPanel({ component, onClose, onUpdate }: PropertiesPane
   return (
     <Box sx={{ 
       width: 320, 
-      bgcolor: 'background.paper', 
-      borderLeft: '1px solid',
+      bgcolor: 'background.paper',
+      borderLeft: 1,
       borderColor: 'divider',
       p: 2, 
       overflow: 'auto',
-      height: '100%'
+      height: '100%',
+      position: 'relative'
     }}>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
         <Typography variant="h6" fontWeight="semibold">

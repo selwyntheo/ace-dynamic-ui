@@ -131,8 +131,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log('selectedComponent changed:', selectedComponent?.type);
-    console.log('showProperties will be set to:', !!selectedComponent);
     setShowProperties(!!selectedComponent);
   }, [selectedComponent]);
 
@@ -225,8 +223,6 @@ function App() {
   };
 
   const handleComponentSelect = (component: UIComponent) => {
-    console.log('handleComponentSelect called with:', component.type, component.name);
-    console.log('Setting selectedComponent to:', component);
     setSelectedComponent(component);
   };
 
@@ -240,7 +236,6 @@ function App() {
   };
 
   const handlePropertiesClose = () => {
-    console.log('handlePropertiesClose called - clearing selection');
     setSelectedComponent(null);
     setShowProperties(false);
   };
@@ -363,37 +358,7 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-        {/* Header */}
-        {/* Debug info - moved to top */}
-      <Box 
-        onClick={() => {
-          console.log('Debug panel clicked - event system works!');
-          alert('Debug panel clicked!');
-        }}
-        sx={{ 
-          position: 'fixed', 
-          top: 10, 
-          left: 10, 
-          backgroundColor: 'red', 
-          color: 'white', 
-          p: 2, 
-          fontSize: '1rem', 
-          borderRadius: 2, 
-          zIndex: 99999,
-          border: '2px solid yellow',
-          minWidth: '300px',
-          cursor: 'pointer'
-        }}
-      >
-        <div>Builder: {isBuilderMode ? 'ON' : 'OFF'}</div>
-        <div>ShowProps: {showProperties ? 'ON' : 'OFF'}</div>
-        <div>Selected: {selectedComponent?.type || 'None'}</div>
-        <div style={{ marginTop: '8px', fontSize: '0.8rem' }}>
-          Click this panel to test events
-        </div>
-      </Box>
-
-      {/* Header App Bar */}
+        {/* Header App Bar */}
       <AppBar position="static" sx={{ zIndex: 1200 }}>
         <Toolbar>
           <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
@@ -516,22 +481,6 @@ function App() {
               onClose={handlePropertiesClose}
               onUpdate={handleComponentUpdate}
             />
-          )}
-          {/* Debug: Force show properties panel status */}
-          {isBuilderMode && (
-            <Box sx={{ 
-              position: 'fixed', 
-              top: 100, 
-              left: 10, 
-              backgroundColor: 'blue', 
-              color: 'white', 
-              p: 1, 
-              fontSize: '0.8rem', 
-              borderRadius: 1, 
-              zIndex: 99998
-            }}>
-              Properties Panel Should Render: {showProperties ? 'YES' : 'NO'}
-            </Box>
           )}
         </DndContext>
 
