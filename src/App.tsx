@@ -358,18 +358,25 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-        {/* Header App Bar */}
-      <AppBar position="static" sx={{ zIndex: 1200 }}>
-        <Toolbar>
+      {/* Header App Bar */}
+      <AppBar position="static" sx={{ 
+        zIndex: 1200,
+        bgcolor: 'grey.900',
+        '& .MuiToolbar-root': {
+          bgcolor: 'grey.900'
+        }
+      }}>
+        <Toolbar sx={{ bgcolor: 'grey.900' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
-            <Typography variant="h6" component="h1" sx={{ fontWeight: 'bold', mr: 2 }}>
+            <Typography variant="h6" component="h1" sx={{ fontWeight: 'bold', mr: 2, color: 'white' }}>
               Dynamic UI Builder
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ 
+            <Typography variant="body2" sx={{ 
               fontStyle: 'italic',
               px: 2,
               py: 0.5,
-              backgroundColor: 'grey.100',
+              backgroundColor: 'grey.700',
+              color: 'grey.100',
               borderRadius: 1
             }}>
               {currentPageName}
@@ -379,80 +386,150 @@ function App() {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mr: 4 }}>
             <Button
               variant="outlined"
-              color="primary"
               size="small"
               startIcon={<Save />}
               onClick={() => setShowSaveDialog(true)}
-              sx={{ textTransform: 'none', borderRadius: 0 }}
+              sx={{ 
+                textTransform: 'none', 
+                borderRadius: 0,
+                borderColor: 'grey.400',
+                color: 'grey.100',
+                '&:hover': {
+                  borderColor: 'grey.300',
+                  bgcolor: 'grey.800'
+                }
+              }}
             >
               Save
             </Button>
             <Button
               variant="outlined"
-              color="primary"
               size="small"
               startIcon={<FolderOpen />}
               onClick={() => {
                 loadAvailablePages();
                 setShowLoadDialog(true);
               }}
-              sx={{ textTransform: 'none', borderRadius: 0 }}
+              sx={{ 
+                textTransform: 'none', 
+                borderRadius: 0,
+                borderColor: 'grey.400',
+                color: 'grey.100',
+                '&:hover': {
+                  borderColor: 'grey.300',
+                  bgcolor: 'grey.800'
+                }
+              }}
             >
               Load
             </Button>
             <Button
               variant="outlined"
-              color="primary"
               size="small"
               startIcon={<MoreVert />}
               onClick={(e) => setMenuAnchor(e.currentTarget)}
-              sx={{ textTransform: 'none', borderRadius: 0 }}
+              sx={{ 
+                textTransform: 'none', 
+                borderRadius: 0,
+                borderColor: 'grey.400',
+                color: 'grey.100',
+                '&:hover': {
+                  borderColor: 'grey.300',
+                  bgcolor: 'grey.800'
+                }
+              }}
             >
               More
             </Button>
             <Button
               variant="outlined"
-              color="primary"
               size="small"
               startIcon={<Add />}
               onClick={() => setShowTemplateSelector(true)}
-              sx={{ textTransform: 'none', borderRadius: 0 }}
+              sx={{ 
+                textTransform: 'none', 
+                borderRadius: 0,
+                borderColor: 'grey.400',
+                color: 'grey.100',
+                '&:hover': {
+                  borderColor: 'grey.300',
+                  bgcolor: 'grey.800'
+                }
+              }}
             >
               Templates
             </Button>
             <Button
               variant="outlined"
-              color="primary"
               size="small"
               startIcon={<ViewColumn />}
               onClick={() => setShowLayoutSelector(true)}
-              sx={{ textTransform: 'none', borderRadius: 0 }}
+              sx={{ 
+                textTransform: 'none', 
+                borderRadius: 0,
+                borderColor: 'grey.400',
+                color: 'grey.100',
+                '&:hover': {
+                  borderColor: 'grey.300',
+                  bgcolor: 'grey.800'
+                }
+              }}
             >
               Layout
             </Button>
             <Button
               variant={isBuilderMode ? "contained" : "outlined"}
-              color="primary"
               size="small"
               startIcon={<Settings />}
               onClick={() => setBuilderMode(true)}
-              sx={{ textTransform: 'none' }}
+              sx={{ 
+                textTransform: 'none',
+                ...(isBuilderMode ? {
+                  bgcolor: 'primary.main',
+                  color: 'white',
+                  '&:hover': {
+                    bgcolor: 'primary.dark'
+                  }
+                } : {
+                  borderColor: 'grey.400',
+                  color: 'grey.100',
+                  '&:hover': {
+                    borderColor: 'grey.300',
+                    bgcolor: 'grey.800'
+                  }
+                })
+              }}
             >
               Builder
             </Button>
             <Button
               variant={!isBuilderMode ? "contained" : "outlined"}
-              color="success"
               size="small"
               startIcon={<PlayArrow />}
               onClick={() => setBuilderMode(false)}
-              sx={{ textTransform: 'none' }}
+              sx={{ 
+                textTransform: 'none',
+                ...(!isBuilderMode ? {
+                  bgcolor: 'success.main',
+                  color: 'white',
+                  '&:hover': {
+                    bgcolor: 'success.dark'
+                  }
+                } : {
+                  borderColor: 'grey.400',
+                  color: 'grey.100',
+                  '&:hover': {
+                    borderColor: 'grey.300',
+                    bgcolor: 'grey.800'
+                  }
+                })
+              }}
             >
               Preview
             </Button>
           </Box>
           
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" sx={{ color: 'grey.300' }}>
             {components.length} component{components.length !== 1 ? 's' : ''}
           </Typography>
         </Toolbar>
