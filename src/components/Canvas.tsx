@@ -25,6 +25,7 @@ export function Canvas({ components, onComponentSelect, onComponentResize, layou
   });
 
   const handleComponentClick = (component: UIComponent) => {
+    console.log('Canvas handleComponentClick called with:', component.type, component.name);
     onComponentSelect?.(component);
   };
 
@@ -93,7 +94,10 @@ export function Canvas({ components, onComponentSelect, onComponentResize, layou
                   key={component.id}
                   component={component}
                   index={index}
-                  onClick={() => handleComponentClick(component)}
+                  onClick={() => {
+                    console.log('ComponentRenderer onClick prop called for:', component.type);
+                    handleComponentClick(component);
+                  }}
                   mongoQueryResult={mongoQueryResults[component.id]}
                   onMongoQueryOpen={(componentId: string) => handleMongoQueryOpen(componentId)}
                   onResize={onComponentResize}
@@ -380,7 +384,23 @@ function ComponentRenderer({
       }}
       {...attributes}
       {...listeners}
-      onClick={onClick}
+      onClick={(e) => {
+        console.log('Box onClick triggered, isDragging:', isDragging, 'isResizing:', isResizing);
+        // Only trigger selection if not dragging and not clicking on resize handles
+        if (!isDragging && !isResizing) {
+          const target = e.target as HTMLElement;
+          console.log('Click target:', target.tagName, target.className);
+          if (!target.closest('.resize-handle') && !target.closest('button')) {
+            console.log('Calling onClick handler');
+            e.stopPropagation();
+            onClick();
+          } else {
+            console.log('Click ignored - target is resize handle or button');
+          }
+        } else {
+          console.log('Click ignored - dragging or resizing');
+        }
+      }}
       sx={{
         position: 'relative',
         cursor: isDragging ? 'grabbing' : isResizing ? 'resizing' : 'grab',

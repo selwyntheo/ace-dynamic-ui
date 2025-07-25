@@ -21,7 +21,10 @@ interface PropertiesPanelProps {
 }
 
 export function PropertiesPanel({ component, onClose, onUpdate }: PropertiesPanelProps) {
+  console.log('PropertiesPanel render - component:', component?.type, component?.name);
+  
   if (!component) {
+    console.log('PropertiesPanel: No component provided, returning null');
     return null;
   }
 
