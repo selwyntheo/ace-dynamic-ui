@@ -26,13 +26,16 @@ export function DatasetSelector({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log('🔍 DatasetSelector mounting, fetching datasets...');
     fetchDatasets();
   }, []);
 
   const fetchDatasets = async () => {
+    console.log('🔍 DatasetSelector: Starting fetch...');
     setLoading(true);
     try {
       const response = await datasetApi.getAll();
+      console.log('🔍 DatasetSelector: Fetched datasets:', response.data.length);
       setDatasets(response.data);
     } catch (error) {
       console.error('Failed to fetch datasets:', error);
@@ -49,7 +52,7 @@ export function DatasetSelector({
   return (
     <FormControl fullWidth size="small">
       <Select
-        value={selectedDatasetId || ''}
+        value={selectedDatasetId && datasets.some(d => d.id === selectedDatasetId) ? selectedDatasetId : ''}
         onChange={(e) => handleChange(e.target.value)}
         disabled={loading}
         displayEmpty

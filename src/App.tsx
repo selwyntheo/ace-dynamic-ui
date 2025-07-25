@@ -131,6 +131,8 @@ function App() {
   };
 
   useEffect(() => {
+    console.log('🔍 selectedComponent changed to:', selectedComponent?.type || 'null');
+    console.log('🔍 showProperties will be set to:', !!selectedComponent);
     setShowProperties(!!selectedComponent);
   }, [selectedComponent]);
 
@@ -172,7 +174,7 @@ function App() {
         let defaultProperties = {};
         if (componentType === 'table') {
           defaultProperties = {
-            datasetId: '6883081e05182d178a9bcb19', // Default to Users dataset
+            datasetId: '6882fa61f4439e5691890c75', // Default to Users dataset (first valid one)
             showPagination: true,
             showSearch: true,
             pageSize: '10'
@@ -223,6 +225,8 @@ function App() {
   };
 
   const handleComponentSelect = (component: UIComponent) => {
+    console.log('🔍 handleComponentSelect called with:', component.type, component.name);
+    console.log('🔍 Setting selectedComponent state...');
     setSelectedComponent(component);
   };
 
@@ -537,6 +541,37 @@ function App() {
 
       {/* Main Content */}
       <Box sx={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+        {/* Always visible debug panel */}
+        <div style={{
+          position: 'fixed',
+          top: '70px',
+          left: '10px',
+          background: 'lime',
+          color: 'black',
+          padding: '15px',
+          zIndex: 99999,
+          border: '3px solid blue',
+          fontSize: '14px',
+          fontFamily: 'monospace'
+        }}>
+          <div>🔍 ALWAYS VISIBLE DEBUG:</div>
+          <div>isBuilderMode: {String(isBuilderMode)}</div>
+          <div>showProperties: {String(showProperties)}</div>
+          <div>selectedComponent: {selectedComponent?.type || 'null'}</div>
+          <div>components.length: {components.length}</div>
+          <button 
+            onClick={() => {
+              console.log('🧪 TEST: Manual selection of first component');
+              if (components.length > 0) {
+                handleComponentSelect(components[0]);
+              }
+            }}
+            style={{ marginTop: '10px', padding: '5px', background: 'yellow' }}
+          >
+            TEST: Select First Component
+          </button>
+        </div>
+        
         <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
           {isBuilderMode && (
             <ComponentPanel 
@@ -553,11 +588,25 @@ function App() {
           />
           
           {isBuilderMode && showProperties && (
-            <PropertiesPanel
-              component={selectedComponent}
-              onClose={handlePropertiesClose}
-              onUpdate={handleComponentUpdate}
-            />
+            <>
+              <div style={{
+                position: 'fixed',
+                top: '200px',
+                left: '10px',
+                background: 'orange',
+                color: 'black',
+                padding: '10px',
+                zIndex: 99999,
+                border: '2px solid red'
+              }}>
+                🔍 DEBUG: showProperties={String(showProperties)}, selectedComponent={selectedComponent?.type || 'null'}
+              </div>
+              <PropertiesPanel
+                component={selectedComponent}
+                onClose={handlePropertiesClose}
+                onUpdate={handleComponentUpdate}
+              />
+            </>
           )}
         </DndContext>
 
