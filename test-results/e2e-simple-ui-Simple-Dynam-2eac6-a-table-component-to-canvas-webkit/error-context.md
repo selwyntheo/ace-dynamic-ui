@@ -1,0 +1,42 @@
+# Page snapshot
+
+```yaml
+- banner:
+  - heading "Dynamic UI Builder" [level=1]
+  - paragraph: Untitled Page
+  - button "Save"
+  - button "Load"
+  - button "More"
+  - button "Templates"
+  - button "Layout"
+  - button "Builder"
+  - button "Preview"
+  - paragraph: 0 components
+- heading "Components" [level=6]
+- button "Collapse Component Library (Ctrl+B)"
+- tablist:
+  - tab "Basic" [selected]
+  - tab "Form Inputs"
+  - tab "Date & Time"
+  - tab "Data & Tables"
+  - tab "Charts"
+  - tab "Navigation"
+  - tab "Media & Files"
+- textbox "Search components..."
+- button "Text":
+  - img
+  - paragraph: Text
+- button "Button":
+  - img: BTN
+  - paragraph: Button
+- button "Card":
+  - img
+  - paragraph: Card
+- button "Image":
+  - img
+  - paragraph: Image
+- heading "📋" [level=1]
+- heading "Start Building Your App" [level=5]
+- paragraph: Drag components from the left panel to start building your dynamic UI
+- status
+```

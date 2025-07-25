@@ -1,0 +1,14 @@
+com/dynamicui/repository/UIComponentRepository.class
+com/dynamicui/model/UIComponent.class
+com/dynamicui/repository/DatasetRepository.class
+com/dynamicui/controller/UIComponentController.class
+com/dynamicui/service/MongoQueryService.class
+com/dynamicui/model/MongoQuery.class
+com/dynamicui/config/MongoDataInitializer.class
+com/dynamicui/controller/DatasetController.class
+com/dynamicui/config/MongoConfig.class
+com/dynamicui/service/DataGenerationService.class
+com/dynamicui/controller/MongoQueryController.class
+com/dynamicui/config/DataInitializer.class
+com/dynamicui/model/Dataset.class
+com/dynamicui/DynamicUiApplication.class
